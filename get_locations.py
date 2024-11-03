@@ -1,11 +1,10 @@
 import requests
-import json
 import csv
 import time
+import json
 
 api_key = 'SVIWSxowXKKfzsXFqkAbVWd8NAmZeDns'
 event_url = 'https://app.ticketmaster.com/discovery/v2/events.json'
-venue_url = 'https://app.ticketmaster.com/discovery/v2/venues/'
 
 def fetch_music_event_venues():
     page_number = 0
@@ -20,8 +19,12 @@ def fetch_music_event_venues():
         params['page'] = page_number
         response = requests.get(event_url, params=params)
         
+        # Print the full URL to debug parameter issues
+        print("Requesting URL:", response.url)
+        
         if response.status_code != 200:
             print(f"Failed to fetch data. Status Code: {response.status_code}")
+            print("Response content:", response.text)
             break
         
         try:
@@ -34,18 +37,24 @@ def fetch_music_event_venues():
         if 'events' not in data.get('_embedded', {}):
             break
         
-        # Collect unique venues
+        # Collect unique venues, only if they are in the United States
         for event in data['_embedded']['events']:
             for venue in event['_embedded'].get('venues', []):
                 venue_id = venue.get('id')
-                if venue_id and venue_id not in unique_venues:
+                country = venue.get('country', {}).get('name', 'N/A')
+                
+                # Normalize the country name for comparison
+                if venue_id and country.lower().strip() == "united states of america".lower().strip() and venue_id not in unique_venues:
                     unique_venues[venue_id] = {
                         'name': venue.get('name', 'N/A'),
                         'address': venue.get('address', {}).get('line1', 'N/A'),
                         'city': venue.get('city', {}).get('name', 'N/A'),
                         'state': venue.get('state', {}).get('name', 'N/A'),
-                        'country': venue.get('country', {}).get('name', 'N/A')
+                        'country': country
                     }
+                else:
+                    # Print out the country for debugging purposes
+                    print(f"Skipping venue with country: {country}")
         
         # Check if there are more pages
         page_number += 1
