@@ -44,7 +44,7 @@ def get_events_by_city(city, state, api_key):
         print(f"Error {response.status_code}: Unable to fetch events.")
         return []
 
-def handle_ambiguous_city(city, api_key):
+def handle_ambiguous_city(city, state, api_key):
     """
     Handle the case where a city name exists in multiple states.
     
@@ -56,7 +56,7 @@ def handle_ambiguous_city(city, api_key):
         list: A list of events for the specified city or a prompt to select a state.
     """
     # Try to fetch events for the city without a state specified
-    events = get_events_by_city(city, None, api_key)
+    events = get_events_by_city(city, state, api_key)
     
     if events:
         # Check if multiple cities with the same name exist (based on city-state pairs)
@@ -107,12 +107,12 @@ def save_events_to_csv(events, city, filename_prefix="events"):
 
         filename = f"{filename_prefix}_{city_clean}_{state_clean}.csv"
         
-        with open(filename, mode="w", newline="", encoding="utf-8") as file:
-            writer = csv.writer(file)
-            writer.writerow(["Event Name", "Event Date", "City", "State"])  # Header row
-            writer.writerows(events)
+        #with open(filename, mode="w", newline="", encoding="utf-8") as file:
+        #    writer = csv.writer(file)
+        #    writer.writerow(["Event Name", "Event Date", "City", "State"])  # Header row
+        #    writer.writerows(events)
         
-        print(f"Results saved to {filename}")
+        #print(f"Results saved to {filename}")
     else:
         print("No events to save.")
 
@@ -120,14 +120,15 @@ def save_events_to_csv(events, city, filename_prefix="events"):
 if __name__ == "__main__":
     api_key = "SVIWSxowXKKfzsXFqkAbVWd8NAmZeDns"
     city = input("Enter the city for events: ")
+    state = input("Enter the state initials (CA for example):  ")
     
-    events = handle_ambiguous_city(city, api_key)
+    events = handle_ambiguous_city(city, state, api_key)
     
     if events:
         print(f"Upcoming events in {city}:")
         for event in events:
             print(f"Event: {event[0]}, Date: {event[1]}, City: {event[2]}, State: {event[3]}")
         
-        save_events_to_csv(events, city)
+        #save_events_to_csv(events, city)
     else:
         print("No events to save.")
