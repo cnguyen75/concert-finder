@@ -7,7 +7,7 @@ CITIES_FILE = "uscities.csv"
 cities_df = pd.read_csv(CITIES_FILE)
 
 st.title("Event Finder")
-st.text("Welcome to our event finder! Please fill out the search criteria to the left and we find some Ticketmaster events for you to attend!")
+st.text("Welcome to our event finder! Please fill out the search criteria to the left and we will find some Ticketmaster events for you to attend!")
 st.sidebar.header("Search Criteria")
 state = st.sidebar.selectbox("Select a State:", cities_df['state_name'].unique())
 city = st.sidebar.selectbox("Select a City:", cities_df[cities_df['state_name'] == state]['city'].unique())
