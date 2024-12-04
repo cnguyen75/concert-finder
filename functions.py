@@ -43,16 +43,6 @@ def get_events_by_city(city, state, API_KEY):
         return []
 
 def handle_ambiguous_city(city, state, API_KEY):
-    """
-    Handle the case where a city name exists in multiple states.
-    
-    Args:
-        city (str): Name of the city to search for events.
-        api_key (str): Ticketmaster API key.
-    
-    Returns:
-        list: A list of events for the specified city or a prompt to select a state.
-    """
     events = get_events_by_city(city, state, API_KEY)
     
     if events:
