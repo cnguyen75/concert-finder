@@ -60,7 +60,7 @@ def get_events_nearby(input_city, input_state, radius):
     for city in nearby_cities:
         # Fetch events for each city
         print(f"Fetching events for {city}...")
-        events = handle_ambiguous_city(city, state, api_key)  # Reuse existing logic
+        events = handle_ambiguous_city(city, input_state, api_key)  # Reuse existing logic
         all_events.extend(events)
     
     if all_events:

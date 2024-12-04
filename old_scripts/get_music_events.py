@@ -1,7 +1,6 @@
 # get_music_events.py
 
 import requests
-import csv
 import us  # Import the 'us' library
 
 def get_events_by_city(city, state, api_key):
