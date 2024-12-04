@@ -1,0 +1,16 @@
+
+```{python}
+from functions import *
+```
+
+
+Here is an example query that a user may give and the corresponding output. Suppose the user wants to see all the events within 20 miles of San Francisco, California. 
+```{python}
+# Sample User Input
+state = 'CA'
+city = 'San Francisco'
+radius = '20'
+
+get_events_nearby(city, state, radius)
+```
+
