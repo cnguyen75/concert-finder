@@ -1,16 +1,45 @@
+# Final Project Report
+
+insert introductory paragraph here
+
+## Data Description
+
+describe API here
+
+## Exploratory Data Analysis
+
+```{python}
+import numpy as np
+import pandas as pd
+```
+
+finish eda here
+
+## Creation of Event Finder
+
+We created a simple interface for users to interact with the Ticketmaster API. The user will provide three pieces of information: a US state, a US city within the given state, and how far they are willing to drive in miles. We process this data and then return to the user all of the events that Ticketmaster services in their area.
+
+To do this we wrote four functions. The main function call is to `get_events_nearby`. This function first deals with gathering all of the cities within the travel radius using helper function `get_cities_within_radius`. This helper function uses the uscities.csv file and the geodesic Python library to find all of the cities within the provided travel radius. Then, `get_events_nearby` iterates through all of the cities in the travel radius and calls the helper function `handle_ambigious_city` for each one. This function deals with any duplicate city names within a state and gathers all of the events in the given city using the Ticketmaster API. Finally, `get_events_nearby` returns a list of all of the events occurring within the travel radius. All of the code for these functions can be found in `functions.py` in our repository.
+
+Here is an example query the corresponding output. Suppose a user wants to see all the events within 20 miles of San Francisco, California.
 
 ```{python}
 from functions import *
-```
 
-
-Here is an example query that a user may give and the corresponding output. Suppose the user wants to see all the events within 20 miles of San Francisco, California. 
-```{python}
 # Sample User Input
 state = 'CA'
 city = 'San Francisco'
 radius = '20'
 
-get_events_nearby(city, state, radius)
+output = get_events_nearby(city, state, radius)
+
+output_df = pd.DataFrame(output)
+
+output_df.head()
 ```
 
+After completing the functions for data processing and API interaction, we shifted our focus to developing the user interface. For this, we used the open-source Streamlit Python package. Streamlit enables developers to create web applications directly within Python, offering an intuitive and user-friendly framework that suited our needs perfectly. The code for implementing the web app is located in the `event_finder.py` file in our repository. Below is a preview of how the final product turned out:
+
+![](eventfinder_image.png)
+
+Here, the user searched for events within 40 miles of Los Angeles, California. In our final product, the dataframe is sorted by date to ensure that the user sees the events occurring soonest at the top, making it easier to prioritize upcoming events.

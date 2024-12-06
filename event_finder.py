@@ -32,5 +32,3 @@ if st.sidebar.button("Find Events"):
         
     else:
         st.warning("It doesn't seem like there are any events in the specifed area. Better luck next time!")
-
-
