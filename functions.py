@@ -4,9 +4,10 @@ import requests
 import us  
 
 API_KEY = 'SVIWSxowXKKfzsXFqkAbVWd8NAmZeDns'
+url = "https://app.ticketmaster.com/discovery/v2/events.json"
+
 
 def get_events_by_city(city, state, API_KEY):
-    url = "https://app.ticketmaster.com/discovery/v2/events.json"
     
     params = {
         "apikey": API_KEY,
@@ -31,11 +32,12 @@ def get_events_by_city(city, state, API_KEY):
             venue = event.get("_embedded", {}).get("venues", [{}])[0]
             venue_city = venue.get("city", {}).get("name", "Unknown City")
             venue_state = venue.get("state", {}).get("stateCode", "Unknown State")
-            
+
             event_name = event["name"]
             event_date = event["dates"]["start"].get("localDate", "TBD")
+            event_id = event.get("id", None)  
 
-            event_details.append((event_name, event_date, venue_city, venue_state))
+            event_details.append((event_name, event_date, venue_city, venue_state, event_id))
         
         return event_details
 
@@ -103,3 +105,41 @@ def get_events_nearby(input_city, input_state, radius, progress_bar=None):
             progress_bar.progress((index + 1) / total_cities)
    
     return all_events
+
+def get_event_details(event_id):
+    url = f"https://app.ticketmaster.com/discovery/v2/events/{event_id}.json"
+    params = {
+        "apikey": API_KEY
+    }
+
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status() 
+
+        data = response.json()
+
+        event_details = {
+            "event_name": data.get("name", "N/A"),
+            "date": data.get("dates", {}).get("start", {}).get("localDate", "N/A"),
+            "city": data.get("_embedded", {}).get("venues", [{}])[0].get("city", {}).get("name", "N/A"),
+            "state": data.get("_embedded", {}).get("venues", [{}])[0].get("state", {}).get("name", "N/A"),
+            "description": data.get("info", "N/A"),
+            "venue": data.get("_embedded", {}).get("venues", [{}])[0].get("name", "N/A"),
+            "ticket_link": data.get("url", "N/A"),
+            "sales": {
+                "public_start": data.get("sales", {}).get("public", {}).get("startDateTime", "N/A"),
+                "public_end": data.get("sales", {}).get("public", {}).get("endDateTime", "N/A")
+            },
+            "price_ranges": [
+                {
+                    "min_price": price_range.get("min", "N/A"),
+                    "max_price": price_range.get("max", "N/A"),
+                    "currency": price_range.get("currency", "N/A")
+                }
+                for price_range in data.get("priceRanges", []) or []
+            ]
+        }
+
+        return event_details
+    except requests.exceptions.RequestException as e:
+        return {"error": f"Unable to fetch event details: {str(e)}"}
