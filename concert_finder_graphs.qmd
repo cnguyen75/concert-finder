@@ -197,6 +197,8 @@ else:
 Map of cities with events
 
 ```{python}
+import folium
+from folium.plugins import MarkerCluster
 
 # Assuming top_10_cities is already defined as a list of city names
 # and event_counts is the dictionary of event counts for the top 20 cities
