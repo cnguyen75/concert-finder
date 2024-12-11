@@ -1,0 +1,245 @@
+---
+title: "Untitled"
+format: html
+---
+
+
+Distribution of number of music events per city of top 20 cities followed by the top 10 from those 20
+
+```{python}
+
+import pandas as pd
+import requests
+import matplotlib.pyplot as plt
+
+API_KEY = 'SVIWSxowXKKfzsXFqkAbVWd8NAmZeDns'
+url = "https://app.ticketmaster.com/discovery/v2/events.json"
+
+# Function to get events for a city with pagination support (no max limit)
+def get_events_by_city(city, state, API_KEY):
+    events = []
+    page = 0
+    while True:
+        params = {
+            "apikey": API_KEY,
+            "city": city,
+            "classificationName": "music",
+            "page": page,
+            "size": 200  # Adjust size as necessary (up to 200 per page)
+        }
+        if state:
+            params["stateCode"] = state
+
+        response = requests.get(url, params=params)
+        
+        if response.status_code == 200:
+            data = response.json()
+            events_data = data.get("_embedded", {}).get("events", [])
+            if not events_data:
+                break  # Break if no more events are found
+
+            events.extend(events_data)
+            page += 1
+        else:
+            break  # Exit if API response is not successful
+    
+    return events  # Return all events without any limit
+
+# Function to get the number of events for multiple cities
+def get_event_counts_for_cities(cities, state, API_KEY):
+    city_event_counts = {}
+    for city in cities:
+        events = get_events_by_city(city, state, API_KEY)
+        city_event_counts[city] = len(events)
+    return city_event_counts
+
+# List of top 20 cities for the graph
+top_20_cities = [
+    "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", 
+    "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "San Francisco", "Charlotte", 
+    "Indianapolis", "Seattle", "Denver", "Washington"
+]
+
+# Get event counts for the top 20 cities
+event_counts = get_event_counts_for_cities(top_20_cities, "", API_KEY)
+
+# Plotting the event count graph for the top 20 cities
+plt.figure(figsize=(12, 8))
+plt.bar(event_counts.keys(), event_counts.values())
+plt.xlabel('City')
+plt.ylabel('Number of Events')
+plt.title('Number of Music Events per City (Top 20 Cities)')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+
+# Sort cities by number of events and get the top 10 cities
+sorted_cities = sorted(event_counts.items(), key=lambda x: x[1], reverse=True)
+top_10_cities = dict(sorted_cities[:10])
+
+# Plotting the event count graph for the top 10 cities
+plt.figure(figsize=(10, 6))
+plt.bar(top_10_cities.keys(), top_10_cities.values())
+plt.xlabel('City')
+plt.ylabel('Number of Events')
+plt.title('Top 10 Cities by Number of Music Events')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+
+```
+
+
+
+
+
+
+Distribution of number of events per day of the week for top 10 cities
+
+```{python}
+
+from collections import Counter
+import matplotlib.pyplot as plt
+import datetime
+
+# Assuming `top_10_cities` is already defined from earlier code
+top_10_cities = list(top_10_cities.keys())  # Convert to a list of city names
+state = ""  # Adjust if state information is available
+
+# Fetch events for all top 10 cities
+all_events = []
+for city in top_10_cities:
+    city_events = get_events_by_city(city, state, API_KEY)  # Fetch events for this city
+    all_events.extend(city_events)  # Add these events to the combined list
+
+# Extract the time of day (or day of the week) from event start time
+def get_event_times(events):
+    event_times = []
+    for event in events:
+        start_time = event.get("dates", {}).get("start", {}).get("localDate", "")
+        if start_time:
+            event_times.append(start_time)
+    return event_times
+
+# Extract event times and convert to days of the week
+event_times = get_event_times(all_events)
+event_days_of_week = [datetime.datetime.strptime(time, "%Y-%m-%d").strftime('%A') for time in event_times]
+
+# Count occurrences of each day of the week
+day_counts = dict(Counter(event_days_of_week))
+
+# Plot day of week distribution
+plt.figure(figsize=(10, 6))
+plt.bar(day_counts.keys(), day_counts.values())
+plt.xlabel('Day of the Week')
+plt.ylabel('Number of Events')
+plt.title('Event Distribution by Day of Week (Top 10 Cities)')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+
+```
+
+
+
+
+
+Scatterplot of min and max prices for events of top 10 cities
+
+```{python}
+
+# Assuming `top_10_cities` is already defined as a list of city names
+state = ""  # Adjust if state information is available
+
+# Fetch events for all top 10 cities
+all_events = []
+for city in top_10_cities:  # Directly iterate over the list of city names
+    city_events = get_events_by_city(city, state, API_KEY)  # Fetch events for this city
+    all_events.extend(city_events)  # Add these events to the combined list
+
+# Function to get price ranges from events
+def get_event_prices(events):
+    prices = []
+    for event in events:
+        price_ranges = event.get("priceRanges", [])
+        if price_ranges:
+            for price_range in price_ranges:
+                min_price = price_range.get("min", None)
+                max_price = price_range.get("max", None)
+                if min_price is not None and max_price is not None:
+                    prices.append((min_price, max_price))
+    return prices
+
+# Extract prices for events in the top 10 cities
+event_prices = get_event_prices(all_events)
+
+# Plot price range distribution
+if event_prices:
+    min_prices, max_prices = zip(*event_prices)  # Separate min and max prices
+    plt.figure(figsize=(10, 6))
+    plt.scatter(min_prices, max_prices, alpha=0.5, edgecolor='k', linewidth=0.5)
+    plt.xlabel('Minimum Price')
+    plt.ylabel('Maximum Price')
+    plt.title('Event Price Ranges for Top 10 Cities')
+    plt.grid(alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+else:
+    print("No price data available.")
+
+```
+
+
+
+
+
+```{python}
+
+import folium
+import pandas as pd
+
+# Load the uscities.csv file
+uscities = pd.read_csv("uscities.csv")
+
+# Function to get latitude and longitude for the top 10 cities
+def get_coordinates_for_top_cities(top_10_cities, uscities):
+    city_coordinates = []
+    for city in top_10_cities:
+        # Match the city name in uscities.csv
+        city_data = uscities[uscities["city"].str.lower() == city.lower()]
+        if not city_data.empty:
+            lat = city_data["lat"].values[0]
+            lng = city_data["lng"].values[0]
+            city_coordinates.append((city, lat, lng))
+        else:
+            print(f"Coordinates for {city} not found in uscities.csv.")
+    return city_coordinates
+
+# Function to plot event distribution on a map
+def plot_event_distribution(city_coordinates):
+    # Create a folium map centered at a general location (e.g., central USA)
+    map_center = [39.8283, -98.5795]  # Center of the USA
+    m = folium.Map(location=map_center, zoom_start=4)
+    
+    # Add markers for each city
+    for city, lat, lng in city_coordinates:
+        folium.Marker(
+            location=[lat, lng],
+            popup=f"{city}",
+            tooltip=f"City: {city}",
+        ).add_to(m)
+    
+    # Save the map to an HTML file or display it directly
+    m.save("event_distribution_map.html")
+    print("Map saved as event_distribution_map.html.")
+
+# Retrieve the top 10 cities dynamically (already sorted in your previous code)
+top_10_cities = top_10_cities  # Use the list of top 10 cities directly
+
+# Get coordinates for the top 10 cities from uscities.csv
+city_coordinates = get_coordinates_for_top_cities(top_10_cities, uscities)
+
+# Plot the geographical distribution of events for the top 10 cities
+plot_event_distribution(city_coordinates)
+
+```
