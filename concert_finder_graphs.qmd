@@ -193,53 +193,49 @@ else:
 
 
 
+
+Map of cities with events
+
 ```{python}
 
-import folium
-import pandas as pd
+# Assuming top_10_cities is already defined as a list of city names
+# and event_counts is the dictionary of event counts for the top 20 cities
 
-# Load the uscities.csv file
-uscities = pd.read_csv("uscities.csv")
+# Select top 10 cities from the sorted event counts
+top_10_cities_event_counts = dict(sorted(event_counts.items(), key=lambda item: item[1], reverse=True)[:10])
 
-# Function to get latitude and longitude for the top 10 cities
-def get_coordinates_for_top_cities(top_10_cities, uscities):
-    city_coordinates = []
-    for city in top_10_cities:
-        # Match the city name in uscities.csv
-        city_data = uscities[uscities["city"].str.lower() == city.lower()]
-        if not city_data.empty:
-            lat = city_data["lat"].values[0]
-            lng = city_data["lng"].values[0]
-            city_coordinates.append((city, lat, lng))
-        else:
-            print(f"Coordinates for {city} not found in uscities.csv.")
-    return city_coordinates
+# Function to add event counts to the map for each city
+def add_event_counts_to_map(city_event_counts):
+    for city, count in city_event_counts.items():
+        coordinates = get_city_coordinates(city)
+        if coordinates:
+            # Customize the marker based on event count
+            if count > 200:  # Example condition for styling markers based on event count
+                icon_color = 'red'
+            elif count > 100:
+                icon_color = 'blue'
+            else:
+                icon_color = 'green'
+                
+            # Add marker with event count info
+            folium.Marker(
+                location=coordinates,
+                popup=f"{city}: {count} Events",
+                tooltip=f"{city}: {count} Events",
+                icon=folium.Icon(color=icon_color, icon='info-sign')
+            ).add_to(marker_cluster)
 
-# Function to plot event distribution on a map
-def plot_event_distribution(city_coordinates):
-    # Create a folium map centered at a general location (e.g., central USA)
-    map_center = [39.8283, -98.5795]  # Center of the USA
-    m = folium.Map(location=map_center, zoom_start=4)
-    
-    # Add markers for each city
-    for city, lat, lng in city_coordinates:
-        folium.Marker(
-            location=[lat, lng],
-            popup=f"{city}",
-            tooltip=f"City: {city}",
-        ).add_to(m)
-    
-    # Save the map to an HTML file or display it directly
-    m.save("event_distribution_map.html")
-    print("Map saved as event_distribution_map.html.")
+# Create a base map (zoomed into the US)
+map_center = [39.8283, -98.5795]  # Center of the US
+mymap = folium.Map(location=map_center, zoom_start=5)
 
-# Retrieve the top 10 cities dynamically (already sorted in your previous code)
-top_10_cities = top_10_cities  # Use the list of top 10 cities directly
+# Create a MarkerCluster object
+marker_cluster = MarkerCluster().add_to(mymap)
 
-# Get coordinates for the top 10 cities from uscities.csv
-city_coordinates = get_coordinates_for_top_cities(top_10_cities, uscities)
+# Add event counts for the top 10 cities to the map
+add_event_counts_to_map(top_10_cities_event_counts)
 
-# Plot the geographical distribution of events for the top 10 cities
-plot_event_distribution(city_coordinates)
+# Save the map to an HTML file
+mymap.save("concert_event_map.html")
 
 ```
