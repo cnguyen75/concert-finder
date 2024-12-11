@@ -194,6 +194,7 @@ else:
 ```{python}
 from geopy.geocoders import Nominatim
 
+#Function to get coordinates of city
 def get_city_coordinates(city):
     geolocator = Nominatim(user_agent="city_locator")
     location = geolocator.geocode(city)
@@ -211,11 +212,10 @@ Map of cities with events
 import folium
 from folium.plugins import MarkerCluster
 
-# Assuming top_10_cities is already defined as a list of city names
-# and event_counts is the dictionary of event counts for the top 20 cities
+# Assuming event_counts is the dictionary of event counts for all cities
 
-# Select top 10 cities from the sorted event counts
-top_10_cities_event_counts = dict(sorted(event_counts.items(), key=lambda item: item[1], reverse=True)[:10])
+# Select top 20 cities from the sorted event counts
+top_20_cities_event_counts = dict(sorted(event_counts.items(), key=lambda item: item[1], reverse=True)[:20])
 
 # Function to add event counts to the map for each city
 def add_event_counts_to_map(city_event_counts):
@@ -245,10 +245,10 @@ mymap = folium.Map(location=map_center, zoom_start=5)
 # Create a MarkerCluster object
 marker_cluster = MarkerCluster().add_to(mymap)
 
-# Add event counts for the top 10 cities to the map
-add_event_counts_to_map(top_10_cities_event_counts)
+# Add event counts for the top 20 cities to the map
+add_event_counts_to_map(top_20_cities_event_counts)
 
 # Save the map to an HTML file
 mymap.save("concert_event_map.html")
-
 ```
+

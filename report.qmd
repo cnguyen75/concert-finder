@@ -1,10 +1,10 @@
 # Final Project Report
 
-insert introductory paragraph here
+For our final project, we decided to leverage the Ticketmaster API to recommend events based on user preferences. Users provide their city, state, and the maximum distance they are willing to travel. We then identify events happening nearby that are within the radius they are willing to go. The result of this is a personalized list of events that matches the user's location and traveling preferences, making it easier for them to discover and go to events near them.
 
 ## Data Description
 
-describe API here
+The Ticketmaster Discovery API is a RESTful API that allows developers to search for and retrieve information about live events such as concerts, theater, and sports events, as well as when and where they are taking place. Specifically, we used the API's ability to filter events by city, state, and radius to identify events near them. We accessed details such as event name, venue, and date to provide users with personalized event recommendations. 
 
 ## Exploratory Data Analysis
 
@@ -13,7 +13,20 @@ import numpy as np
 import pandas as pd
 ```
 
-finish eda here
+Our exploratory data analysis (EDA) focused on understanding the distribution and characteristics of events in the top cities. First, we explored the number of events in the top 10 cities, with New York and Chicago having the most amount of events at nearly 1,000. 
+![](top10cities.png)
+
+Next, we expanded our analysis to the top 20 cities. This graph had a much more varied distribution of the number of events across these cities, ranging from 54 events in the city with the lowest frequency (San Jose) to 1,000 to the city with the highest frequency (New York).
+![](top20citiesevents.png)
+
+Additionally, we also looked at the distribution of the events by day of the week, finding that Friday and Saturday had the most events and Monday had the least. 
+![](eventsdayofweek.png)
+
+Lastly, we analyzed the event price ranges for the top 10 cities, revealing a wide spread of prices. Most events were concentrated on the lower side, but there were some events with prices that exceeded $1,200. 
+![](eventpriceranges.png)
+
+We also created an interactive map using Folium to visualize the distribution of events across the entire country. This map has markers for the top 10 cities 
+
 
 ## Creation of Event Finder
 
