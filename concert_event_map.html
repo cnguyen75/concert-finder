@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4133d8cf872f372850d3619cfa6c519f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_4133d8cf872f372850d3619cfa6c519f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4133d8cf872f372850d3619cfa6c519f = L.map(
+                "map_4133d8cf872f372850d3619cfa6c519f",
+                {
+                    center: [39.8283, -98.5795],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "maxBounds": null,
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_867b5acf9275c4924471d4a0f486345c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_867b5acf9275c4924471d4a0f486345c.addTo(map_4133d8cf872f372850d3619cfa6c519f);
+        
+    
+            var marker_cluster_8bcd9da1cb9168a62addc31c4ad97314 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_df7d01c068a9691a6b8a0c87ae715f0b = L.marker(
+                [40.7127281, -74.0060152],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_66e206dc22d9c9df02a6b73bf064da6e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_df7d01c068a9691a6b8a0c87ae715f0b.setIcon(icon_66e206dc22d9c9df02a6b73bf064da6e);
+        
+    
+        var popup_3470e1d3a614daeb2de8c1c18b6cd906 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_bad72ccc7080259e9582f0a465982dac = $(`<div id="html_bad72ccc7080259e9582f0a465982dac" style="width: 100.0%; height: 100.0%;">New York: 1000 Events</div>`)[0];
+                popup_3470e1d3a614daeb2de8c1c18b6cd906.setContent(html_bad72ccc7080259e9582f0a465982dac);
+            
+        
+
+        marker_df7d01c068a9691a6b8a0c87ae715f0b.bindPopup(popup_3470e1d3a614daeb2de8c1c18b6cd906)
+        ;
+
+        
+    
+    
+            marker_df7d01c068a9691a6b8a0c87ae715f0b.bindTooltip(
+                `<div>
+                     New York: 1000 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_931cb911430bb994a733c9dfc54fbf69 = L.marker(
+                [41.8755616, -87.6244212],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_75e8c4f205a048894347524c3463c6a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_931cb911430bb994a733c9dfc54fbf69.setIcon(icon_75e8c4f205a048894347524c3463c6a7);
+        
+    
+        var popup_6c06845224d66439a8fa6493a578666d = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_4cabea47ce30ab15a23fd449e74c7487 = $(`<div id="html_4cabea47ce30ab15a23fd449e74c7487" style="width: 100.0%; height: 100.0%;">Chicago: 938 Events</div>`)[0];
+                popup_6c06845224d66439a8fa6493a578666d.setContent(html_4cabea47ce30ab15a23fd449e74c7487);
+            
+        
+
+        marker_931cb911430bb994a733c9dfc54fbf69.bindPopup(popup_6c06845224d66439a8fa6493a578666d)
+        ;
+
+        
+    
+    
+            marker_931cb911430bb994a733c9dfc54fbf69.bindTooltip(
+                `<div>
+                     Chicago: 938 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2b7fab8c2e24b350968022ee0a9ed6f3 = L.marker(
+                [47.6038321, -122.330062],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_152fb4f2b8a12e4dcf679dcc0a00b86d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2b7fab8c2e24b350968022ee0a9ed6f3.setIcon(icon_152fb4f2b8a12e4dcf679dcc0a00b86d);
+        
+    
+        var popup_5c7c97883ebcfebe24cb1b13bdcb0441 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_e2537da4e26bcecbb5b79b13946e41a5 = $(`<div id="html_e2537da4e26bcecbb5b79b13946e41a5" style="width: 100.0%; height: 100.0%;">Seattle: 650 Events</div>`)[0];
+                popup_5c7c97883ebcfebe24cb1b13bdcb0441.setContent(html_e2537da4e26bcecbb5b79b13946e41a5);
+            
+        
+
+        marker_2b7fab8c2e24b350968022ee0a9ed6f3.bindPopup(popup_5c7c97883ebcfebe24cb1b13bdcb0441)
+        ;
+
+        
+    
+    
+            marker_2b7fab8c2e24b350968022ee0a9ed6f3.bindTooltip(
+                `<div>
+                     Seattle: 650 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_14cf3acde31c0e37f4c16a8eb6c7e5df = L.marker(
+                [34.0536909, -118.242766],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_36e7612c82a770ef77505eb66b8689a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_14cf3acde31c0e37f4c16a8eb6c7e5df.setIcon(icon_36e7612c82a770ef77505eb66b8689a7);
+        
+    
+        var popup_e907d184e544b93f59fadf69b8354a9e = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_355616741e80f6f674c77c1db4878a42 = $(`<div id="html_355616741e80f6f674c77c1db4878a42" style="width: 100.0%; height: 100.0%;">Los Angeles: 635 Events</div>`)[0];
+                popup_e907d184e544b93f59fadf69b8354a9e.setContent(html_355616741e80f6f674c77c1db4878a42);
+            
+        
+
+        marker_14cf3acde31c0e37f4c16a8eb6c7e5df.bindPopup(popup_e907d184e544b93f59fadf69b8354a9e)
+        ;
+
+        
+    
+    
+            marker_14cf3acde31c0e37f4c16a8eb6c7e5df.bindTooltip(
+                `<div>
+                     Los Angeles: 635 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_6022e09b0101e45d77f7e2194a7eed92 = L.marker(
+                [37.7792588, -122.4193286],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_c28d9b72bcd7454732988f8e04ec9ecf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6022e09b0101e45d77f7e2194a7eed92.setIcon(icon_c28d9b72bcd7454732988f8e04ec9ecf);
+        
+    
+        var popup_1776fc855d415b671b638cf56dac6780 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_03992c05d07f0078eee8661cc66b44e8 = $(`<div id="html_03992c05d07f0078eee8661cc66b44e8" style="width: 100.0%; height: 100.0%;">San Francisco: 542 Events</div>`)[0];
+                popup_1776fc855d415b671b638cf56dac6780.setContent(html_03992c05d07f0078eee8661cc66b44e8);
+            
+        
+
+        marker_6022e09b0101e45d77f7e2194a7eed92.bindPopup(popup_1776fc855d415b671b638cf56dac6780)
+        ;
+
+        
+    
+    
+            marker_6022e09b0101e45d77f7e2194a7eed92.bindTooltip(
+                `<div>
+                     San Francisco: 542 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f8b4435ce644a7eaa5d42d8fff16d409 = L.marker(
+                [39.7392364, -104.984862],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_64d547f56ead81f3849842b6a20a0700 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f8b4435ce644a7eaa5d42d8fff16d409.setIcon(icon_64d547f56ead81f3849842b6a20a0700);
+        
+    
+        var popup_d77951ea02e37575affc7a0071750717 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_95824bbbb84b97d753b64948db8c0488 = $(`<div id="html_95824bbbb84b97d753b64948db8c0488" style="width: 100.0%; height: 100.0%;">Denver: 489 Events</div>`)[0];
+                popup_d77951ea02e37575affc7a0071750717.setContent(html_95824bbbb84b97d753b64948db8c0488);
+            
+        
+
+        marker_f8b4435ce644a7eaa5d42d8fff16d409.bindPopup(popup_d77951ea02e37575affc7a0071750717)
+        ;
+
+        
+    
+    
+            marker_f8b4435ce644a7eaa5d42d8fff16d409.bindTooltip(
+                `<div>
+                     Denver: 489 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_73a5d94c19ec811284bc4ac817dd88ef = L.marker(
+                [38.8950368, -77.0365427],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_e14da9a1ae11f55d8e9ad6c1a2ced8e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_73a5d94c19ec811284bc4ac817dd88ef.setIcon(icon_e14da9a1ae11f55d8e9ad6c1a2ced8e5);
+        
+    
+        var popup_46d94d67472eac06885bddb8f4dc2618 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_a2eb069a50701d107dabbe821f667395 = $(`<div id="html_a2eb069a50701d107dabbe821f667395" style="width: 100.0%; height: 100.0%;">Washington: 465 Events</div>`)[0];
+                popup_46d94d67472eac06885bddb8f4dc2618.setContent(html_a2eb069a50701d107dabbe821f667395);
+            
+        
+
+        marker_73a5d94c19ec811284bc4ac817dd88ef.bindPopup(popup_46d94d67472eac06885bddb8f4dc2618)
+        ;
+
+        
+    
+    
+            marker_73a5d94c19ec811284bc4ac817dd88ef.bindTooltip(
+                `<div>
+                     Washington: 465 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2b266b5d2bf75d30d4650fc449005584 = L.marker(
+                [33.4484367, -112.074141],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_7c135802f1111e3452d63661ffad633e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2b266b5d2bf75d30d4650fc449005584.setIcon(icon_7c135802f1111e3452d63661ffad633e);
+        
+    
+        var popup_c6e3544fa3247febee9864d0ced3caf3 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_082e0b814c6b78fa461448eed4dd057d = $(`<div id="html_082e0b814c6b78fa461448eed4dd057d" style="width: 100.0%; height: 100.0%;">Phoenix: 463 Events</div>`)[0];
+                popup_c6e3544fa3247febee9864d0ced3caf3.setContent(html_082e0b814c6b78fa461448eed4dd057d);
+            
+        
+
+        marker_2b266b5d2bf75d30d4650fc449005584.bindPopup(popup_c6e3544fa3247febee9864d0ced3caf3)
+        ;
+
+        
+    
+    
+            marker_2b266b5d2bf75d30d4650fc449005584.bindTooltip(
+                `<div>
+                     Phoenix: 463 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_92808cefbe43805290a056e03dc52f79 = L.marker(
+                [32.7174202, -117.162772],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_1886c47ddcae5e99f714eced67f4e074 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_92808cefbe43805290a056e03dc52f79.setIcon(icon_1886c47ddcae5e99f714eced67f4e074);
+        
+    
+        var popup_e2cb413cd7a6fedfaeb4aac7770643c9 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_45312bd1e9c55cbac5237237630f0a12 = $(`<div id="html_45312bd1e9c55cbac5237237630f0a12" style="width: 100.0%; height: 100.0%;">San Diego: 418 Events</div>`)[0];
+                popup_e2cb413cd7a6fedfaeb4aac7770643c9.setContent(html_45312bd1e9c55cbac5237237630f0a12);
+            
+        
+
+        marker_92808cefbe43805290a056e03dc52f79.bindPopup(popup_e2cb413cd7a6fedfaeb4aac7770643c9)
+        ;
+
+        
+    
+    
+            marker_92808cefbe43805290a056e03dc52f79.bindTooltip(
+                `<div>
+                     San Diego: 418 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b334b218219fc6333937f8bc26076cab = L.marker(
+                [39.9527237, -75.1635262],
+                {
+  "draggable": null,
+  "autoPan": null,
+}
+            ).addTo(marker_cluster_8bcd9da1cb9168a62addc31c4ad97314);
+        
+    
+            var icon_030e5052c94642d816ba1336910f9cfe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b334b218219fc6333937f8bc26076cab.setIcon(icon_030e5052c94642d816ba1336910f9cfe);
+        
+    
+        var popup_c734a914edf5d650181f61cfdef8fa87 = L.popup({
+  "maxWidth": "100%",
+  "autoClose": null,
+  "closeOnClick": null,
+});
+
+        
+            
+                var html_fd760d4a2cf3d9a1ce8c99fab70e1fb7 = $(`<div id="html_fd760d4a2cf3d9a1ce8c99fab70e1fb7" style="width: 100.0%; height: 100.0%;">Philadelphia: 344 Events</div>`)[0];
+                popup_c734a914edf5d650181f61cfdef8fa87.setContent(html_fd760d4a2cf3d9a1ce8c99fab70e1fb7);
+            
+        
+
+        marker_b334b218219fc6333937f8bc26076cab.bindPopup(popup_c734a914edf5d650181f61cfdef8fa87)
+        ;
+
+        
+    
+    
+            marker_b334b218219fc6333937f8bc26076cab.bindTooltip(
+                `<div>
+                     Philadelphia: 344 Events
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            marker_cluster_8bcd9da1cb9168a62addc31c4ad97314.addTo(map_4133d8cf872f372850d3619cfa6c519f);
+        
+</script>
+</html>
