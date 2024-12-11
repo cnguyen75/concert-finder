@@ -25,7 +25,7 @@ Additionally, we also looked at the distribution of the events by day of the wee
 Lastly, we analyzed the event price ranges for the top 10 cities, revealing a wide spread of prices. Most events were concentrated on the lower side, but there were some events with prices that exceeded $1,200. 
 ![](eventpriceranges.png)
 
-We also created an interactive map using Folium to visualize the distribution of events across the entire country. This map has markers for the top 10 cities 
+We also created an interactive map using Folium to visualize the distribution of events across the entire country. This map has markers for the top 20 cities, with color-coded markers indicating the amount of events. Red markers are cities with over 200 events, blue markers are cities with event counts between 100-200 events, and green markers are cities with below 100 events.
 
 
 ## Creation of Event Finder
