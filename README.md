@@ -7,7 +7,7 @@ Hello! Welcome to our event finder final project for PSTAT 134. We use the Ticke
 2.  Enure that you have downloaded the Streamlit python package. You may run the following code in the command line to do so:
 
     `pip install streamlit`
-    'pip install streamlit-aggrid'
+     `pip install streamlit-aggrid`
 
     Alternatively, you may follow the instructions [here](https://docs.streamlit.io/get-started/installation).
 
